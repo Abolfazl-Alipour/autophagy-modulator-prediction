@@ -1,0 +1,3 @@
+model,auroc_point,ci_lo,ci_hi,n_test,n_positive,n_bootstrap
+Morgan only,0.8769,0.8431,0.9087,1365,155,1000
+Morgan + CLAMP,0.8394,0.7994,0.8751,1365,155,1000

@@ -1,0 +1,14 @@
+__pycache__/
+*.pyc
+venv/
+.latex/
+.paper_venv/
+data/l1000/
+data/models/
+src/
+*.log
+.DS_Store
+chembl_cache/
+scaffold_cache.npy
+chembl_3class_predictions_*.csv
+chembl_cascade_predictions_*.csv

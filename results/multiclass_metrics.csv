@@ -1,0 +1,3 @@
+model,accuracy,macro_f1,activator_precision,activator_recall,inhibitor_precision,inhibitor_recall,neutral_precision,neutral_recall,notes
+3-class Morgan only,0.900,0.532,,,,,,,Neutral class dominates; poor inhibitor discrimination
+3-class Morgan + CLAMP,0.900,0.455,,,,,,,Adding CLAMP made macro F1 worse

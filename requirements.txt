@@ -1,0 +1,29 @@
+# Core scientific stack (Python 3.12)
+rdkit>=2023.3
+xgboost>=2.0
+pandas
+numpy<2.0
+scipy
+scikit-learn
+matplotlib
+h5py
+cmapPy
+requests
+tqdm
+joblib
+
+# CLAMP embeddings (step 4). Install from source:
+#   pip install git+https://github.com/ml-jku/clamp.git
+# plus its runtime deps if not pulled automatically:
+transformers
+torch>=2.0
+torchvision
+loguru
+swifter
+mhnreact @ git+https://github.com/ml-jku/mhn-react.git
+# CLAMP pretrained checkpoint (not pip-installable; download separately):
+#   https://zenodo.org/record/XXXX -> data/models/clamp_clip/checkpoint.pt
+
+# Uni-Mol embeddings (step 2); the embedding cache used in the study is
+# provided in models/unimol_embeddings_l1000_10k.pt. To regenerate from SMILES:
+#   pip install unimol-tools

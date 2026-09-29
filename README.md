@@ -6,11 +6,9 @@ Code and data for the preprint:
 > Transcriptome Collapse to Morgan Fingerprint Classifiers* (bioRxiv, 2026).
 
 Archived at **https://doi.org/10.5281/zenodo.22986834** (concept DOI, always
-resolves to the latest version). Study blog post:
-https://rezaalipour.com/blog/what-broke-predicting-autophagy
+resolves to the latest version). 
 
-This repository is a clean, self-contained copy of the study pipeline. It
-contains every script, label set, trained model, result table, and report
+This repositorycontains every script, label set, trained model, result table, and report
 needed to replicate all figures and numbers in the paper. Raw LINCS L1000
 data (GSE92742, ~4 GB download) is the only external input; everything else
 is either included or fetched by the scripts.

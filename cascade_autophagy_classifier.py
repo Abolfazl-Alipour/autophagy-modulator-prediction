@@ -43,10 +43,10 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s | %(message)s')
 logger = logging.getLogger(__name__)
 
 WORK_DIR = Path(__file__).resolve().parent
-HAMDB_PATH = WORK_DIR / 'hamdb_autophagy_directions.csv'
-BINARY_MODEL_PATH = WORK_DIR / 'binary_morgan_only_xgb.pkl'
+HAMDB_PATH = WORK_DIR / 'data' / 'hamdb_autophagy_directions.csv'
+BINARY_MODEL_PATH = WORK_DIR / 'models' / 'binary_morgan_only_xgb.pkl'
 CHEMBL_PREDICTIONS_PATH = WORK_DIR / 'chembl_3class_predictions_all.csv'
-CHEMBL_CANDIDATES_PATH = WORK_DIR / 'chembl_neutral_candidates.csv'
+CHEMBL_CANDIDATES_PATH = WORK_DIR / 'data' / 'chembl_neutral_candidates.csv'
 CACHE_DIR = WORK_DIR / 'chembl_cache'
 CACHE_DIR.mkdir(exist_ok=True)
 
@@ -313,7 +313,7 @@ def write_report(cv_results, agg, final_metrics, binary_threshold, direction_thr
     else:
         lines.append('- Direction discrimination is moderate-to-strong; cascade improves over flat 3-class model.\n')
 
-    with open(WORK_DIR / 'cascade_classifier_report.md', 'w') as f:
+    with open(WORK_DIR / 'results' / 'reports' / 'cascade_classifier_report.md', 'w') as f:
         f.writelines(lines)
 
 
@@ -352,7 +352,7 @@ def main():
     logger.info(f'Final test AUROC={final_metrics["auroc"]:.3f}, AUPRC={final_metrics["auprc"]:.3f}, F1={final_metrics["f1"]:.3f}')
     logger.info('\n' + classification_report(test_df['direction_label'], (final_model.predict_proba(test_df[morgan_cols].values)[:, 1] >= 0.5).astype(int), target_names=['activator', 'inhibitor']))
 
-    with open(WORK_DIR / 'direction_morgan_only_xgb.pkl', 'wb') as f:
+    with open(WORK_DIR / 'models' / 'direction_morgan_only_xgb.pkl', 'wb') as f:
         pickle.dump(final_model, f)
     logger.info('Saved direction_morgan_only_xgb.pkl')
 

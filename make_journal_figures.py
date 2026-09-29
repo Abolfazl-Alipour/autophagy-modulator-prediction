@@ -114,7 +114,7 @@ def make_fig1():
 # ---------------------------------------------------------------- fig2
 def make_fig2():
     curves, aurocs = {}, {}
-    for path in ['hamdb_binary_roc_curves.npz', 'binary_roc_curves.npz',
+    for path in ['results/hamdb_binary_roc_curves.npz', 'results/binary_roc_curves.npz',
                  'paper/reconstructed_xgb_roc.npz']:
         data = np.load(WORK_DIR / path, allow_pickle=True)
         for key in data.files:
@@ -169,7 +169,7 @@ def wilson_ci(pct, n, z=1.959963984540054):
 
 
 def make_fig3():
-    df = pd.read_csv(WORK_DIR / 'chembl_enrichment_morgan_vs_clamp.csv')
+    df = pd.read_csv(WORK_DIR / 'results' / 'chembl_enrichment_morgan_vs_clamp.csv')
     metrics = [('autophagy_active_pct', 'ChEMBL autophagy-active annotations', 0.18),
                ('mtor_pi3k_pct', 'ChEMBL mTOR/PI3K target annotations', 0.24)]
 
@@ -236,7 +236,7 @@ def make_fig4():
 
 # ---------------------------------------------------------------- fig5
 def make_fig5():
-    df = pd.read_csv(WORK_DIR / 'paper_feature_importance.csv')
+    df = pd.read_csv(WORK_DIR / 'paper' / 'paper_feature_importance.csv')
     df = df.sort_values('gain', ascending=False).head(15)
     df = df.iloc[::-1]  # largest gain on top for barh
 

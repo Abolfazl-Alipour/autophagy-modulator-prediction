@@ -89,7 +89,7 @@ def main():
         print(known_mtor[['chembl_id', 'smiles', 'modulator_proba', 'predicted_label', 'cascade_label']].head(20).to_string(index=False))
 
     # Save enrichment table
-    stats.to_csv(WORK_DIR / 'chembl_binary_threshold_enrichment.csv', index=False)
+    stats.to_csv(WORK_DIR / 'results' / 'chembl_binary_threshold_enrichment.csv', index=False)
     print('\nSaved chembl_binary_threshold_enrichment.csv')
 
 

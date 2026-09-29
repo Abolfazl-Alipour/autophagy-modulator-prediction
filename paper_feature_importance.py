@@ -27,9 +27,9 @@ from rdkit.Chem import FindAtomEnvironmentOfRadiusN, rdMolDescriptors
 RDLogger.DisableLog("rdApp.*")
 
 REPO = str(Path(__file__).resolve().parent)
-MODEL_PATH = f"{REPO}/binary_morgan_only_xgb.pkl"
-HAMDB_PATH = f"{REPO}/hamdb_autophagy_directions.csv"
-BACKGROUND_PATH = f"{REPO}/chembl_neutral_candidates.csv"
+MODEL_PATH = f"{REPO}/models/binary_morgan_only_xgb.pkl"
+HAMDB_PATH = f"{REPO}/data/hamdb_autophagy_directions.csv"
+BACKGROUND_PATH = f"{REPO}/data/chembl_neutral_candidates.csv"
 N_BITS = 2048
 RADIUS = 2
 TOP_N = 15
@@ -169,7 +169,7 @@ def main():
         )
 
     df = pd.DataFrame(rows)
-    df.to_csv(f"{REPO}/paper_feature_importance.csv", index=False)
+    df.to_csv(f"{REPO}/paper/paper_feature_importance.csv", index=False)
     print("\nTop bits:")
     print(df.to_string(index=False))
 
@@ -193,7 +193,7 @@ def main():
     )
     ax.spines[["top", "right"]].set_visible(False)
     fig.tight_layout()
-    fig.savefig(f"{REPO}/fig5_feature_importance.png", dpi=300)
+    fig.savefig(f"{REPO}/paper/fig5_feature_importance.png", dpi=300)
     plt.close(fig)
 
     print("\nSummary:")

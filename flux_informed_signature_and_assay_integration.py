@@ -45,7 +45,7 @@ logger = logging.getLogger(__name__)
 # ---------------------------------------------------------------------------
 WORK_DIR = Path(__file__).resolve().parent
 CACHE_PATH = WORK_DIR / 'diag_cache_v9_morgan_full.npz'
-HAMDB_PATH = WORK_DIR / 'hamdb_autophagy_directions.csv'
+HAMDB_PATH = WORK_DIR / 'data' / 'hamdb_autophagy_directions.csv'
 PERT_INFO_PATH = WORK_DIR / 'data/l1000/GSE92742_Broad_LINCS_pert_info.txt.gz'
 GENE_FILE = WORK_DIR / 'autophagy_genes.txt'
 

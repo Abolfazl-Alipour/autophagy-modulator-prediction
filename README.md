@@ -27,18 +27,16 @@ is either included or fetched by the scripts.
 
 ## Reproduction pipeline
 
-Run from the repository root. All splits are seeded (42); the reconstructed
-scaffold evaluation is additionally deterministic
-(`PYTHONHASHSEED=0`).
-
-**0. Environment**
+**Quick start (figures + statistics, no L1000 download needed):**
 ```bash
-python -m venv venv && source venv/bin/activate
-pip install -r requirements.txt
-# CLAMP (for embeddings): follow https://github.com/ml-jku/clamp —
-# pip install from its repo, then place the package under src/clamp and the
-# pretrained checkpoint under data/models/clamp_clip/checkpoint.pt
+./setup.sh        # venv, deps, CLAMP + checkpoint, input checks
+make figures      # regenerate all 5 paper figures from the included caches
+make stats        # bootstrap AUROC CIs + feature importance (seed-deterministic)
 ```
+
+**Full pipeline from raw data.** Run from the repository root. All splits are
+seeded (42); the reconstructed scaffold evaluation is additionally
+deterministic (`PYTHONHASHSEED=0`, set automatically by the `Makefile`).
 
 **1. Data curation**
 ```bash

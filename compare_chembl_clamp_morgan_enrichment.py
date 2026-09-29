@@ -28,9 +28,9 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s | %(message)s')
 logger = logging.getLogger(__name__)
 
 WORK_DIR = Path(__file__).resolve().parent
-CHEMBL_CANDIDATES_PATH = WORK_DIR / 'chembl_neutral_candidates.csv'
-MORGAN_MODEL_PATH = WORK_DIR / 'binary_morgan_only_xgb.pkl'
-CLAMP_MODEL_PATH = WORK_DIR / 'binary_morgan_clamp_xgb.pkl'
+CHEMBL_CANDIDATES_PATH = WORK_DIR / 'data' / 'chembl_neutral_candidates.csv'
+MORGAN_MODEL_PATH = WORK_DIR / 'models' / 'binary_morgan_only_xgb.pkl'
+CLAMP_MODEL_PATH = WORK_DIR / 'models' / 'binary_morgan_clamp_xgb.pkl'
 CACHE_DIR = WORK_DIR / 'chembl_cache'
 
 RANDOM_STATE = 42
@@ -144,7 +144,7 @@ def main():
                               'autophagy_active_pct', 'mtor_pi3k_pct', 'lysosomal_pct']]
     comparison = comparison.sort_values(['threshold', 'model']).reset_index(drop=True)
 
-    out_path = WORK_DIR / 'chembl_enrichment_morgan_vs_clamp.csv'
+    out_path = WORK_DIR / 'results' / 'chembl_enrichment_morgan_vs_clamp.csv'
     comparison.to_csv(out_path, index=False)
     logger.info(f'\nSaved {out_path}')
     logger.info('\n' + comparison.to_string(index=False))

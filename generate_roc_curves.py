@@ -36,8 +36,8 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s | %(message)s')
 logger = logging.getLogger(__name__)
 
 WORK_DIR = Path(__file__).resolve().parent
-HAMDB_PATH = WORK_DIR / 'hamdb_autophagy_directions.csv'
-CHEMBL_CANDIDATES_PATH = WORK_DIR / 'chembl_neutral_candidates.csv'
+HAMDB_PATH = WORK_DIR / 'data' / 'hamdb_autophagy_directions.csv'
+CHEMBL_CANDIDATES_PATH = WORK_DIR / 'data' / 'chembl_neutral_candidates.csv'
 
 RANDOM_STATE = 42
 MORGAN_RADIUS = 2
@@ -270,7 +270,7 @@ def main():
     logger.info('=== Loading saved XGB models and computing ROC curves ===')
     for feat_name, feat_cols in feature_sets.items():
         model_key = 'binary_morgan_only' if feat_name == 'Morgan only' else 'binary_morgan_clamp'
-        model_path = WORK_DIR / f'{model_key}_xgb.pkl'
+        model_path = WORK_DIR / 'models' / f'{model_key}_xgb.pkl'
 
         with open(model_path, 'rb') as f:
             model = pickle.load(f)

@@ -85,7 +85,7 @@ def main():
         roc_data[f'XGB {feat_name}'] = np.array([fpr, tpr, thr], dtype=object)
 
         # Saved-pickle model on the same test set (cross-split memorization check)
-        with open(WORK_DIR / f'{key}_xgb.pkl', 'rb') as f:
+        with open(WORK_DIR / 'models' / f'{key}_xgb.pkl', 'rb') as f:
             saved_model = pickle.load(f)
         saved_proba = saved_model.predict_proba(X_test)[:, 1]
         saved_pkl_aurocs[feat_name] = roc_auc_score(y_test, saved_proba)

@@ -52,8 +52,8 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s | %(message)s')
 logger = logging.getLogger(__name__)
 
 WORK_DIR = Path(__file__).resolve().parent
-HAMDB_PATH = WORK_DIR / 'hamdb_autophagy_directions.csv'
-CHEMBL_CANDIDATES_PATH = WORK_DIR / 'chembl_neutral_candidates.csv'
+HAMDB_PATH = WORK_DIR / 'data' / 'hamdb_autophagy_directions.csv'
+CHEMBL_CANDIDATES_PATH = WORK_DIR / 'data' / 'chembl_neutral_candidates.csv'
 CACHE_DIR = WORK_DIR / 'chembl_cache'
 CACHE_DIR.mkdir(exist_ok=True)
 

@@ -23,7 +23,7 @@ import xgboost as xgb
 from joblib import Parallel, delayed
 
 WORK_DIR = Path(__file__).resolve().parent
-HAMDB_PATH = WORK_DIR / 'hamdb_autophagy_directions.csv'
+HAMDB_PATH = WORK_DIR / 'data' / 'hamdb_autophagy_directions.csv'
 RANDOM_STATE = 42
 N_JOBS = 12
 
@@ -194,7 +194,7 @@ def main():
         })
 
     results_df = pd.DataFrame(results)
-    results_df.to_csv(WORK_DIR / 'direction_feature_ablation.csv', index=False)
+    results_df.to_csv(WORK_DIR / 'results' / 'direction_feature_ablation.csv', index=False)
     print('\nSaved direction_feature_ablation.csv')
     print(results_df.to_string(index=False))
 

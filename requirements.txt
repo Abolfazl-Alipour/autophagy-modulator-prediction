@@ -22,7 +22,9 @@ loguru
 swifter
 mhnreact @ git+https://github.com/ml-jku/mhn-react.git
 # CLAMP pretrained checkpoint (not pip-installable; download separately):
-#   https://zenodo.org/record/XXXX -> data/models/clamp_clip/checkpoint.pt
+#   https://cloud.ml.jku.at/s/7nxgpAQrTr69Rp2/download/checkpoint.pt -> data/models/clamp_clip/checkpoint.pt
+#   https://cloud.ml.jku.at/s/dRX9TWPrF7WqnHd/download/hp.json       -> data/models/clamp_clip/hp.json
+# (setup.sh downloads both automatically)
 
 # Uni-Mol embeddings (step 2); the embedding cache used in the study is
 # provided in models/unimol_embeddings_l1000_10k.pt. To regenerate from SMILES:

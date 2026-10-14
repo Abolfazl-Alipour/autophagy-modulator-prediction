@@ -96,7 +96,7 @@ def compute_scaffolds(smiles_list, n_jobs=N_JOBS):
 
 def cluster_scaffolds(scaffold_smiles, cutoff=0.7):
     """Cluster scaffold SMILES by Tanimoto similarity using Butina."""
-    unique_scaffolds = list(set(s for s in scaffold_smiles if s))
+    unique_scaffolds = sorted(set(s for s in scaffold_smiles if s))  # sorted: set order is hash-seed dependent
     logger.info(f'Clustering {len(unique_scaffolds)} unique scaffolds...')
 
     fps = []

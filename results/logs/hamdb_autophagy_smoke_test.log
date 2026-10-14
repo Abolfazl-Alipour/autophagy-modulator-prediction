@@ -1,0 +1,34 @@
+2026-06-19 16:55:52,986 | === HAMDB-only autophagy smoke test ===
+2026-06-19 16:55:53,058 | HAMDB compounds with SMILES: 813
+2026-06-19 16:55:53,058 | HAMDB compounds with numeric PubChem CID: 813
+2026-06-19 16:55:53,135 | HAMDB compounds found in L1000: 230
+2026-06-19 16:55:53,135 | Loading full L1000 cache...
+2026-06-19 16:57:34,599 | HAMDB signatures in full cache: 11298
+2026-06-19 16:57:34,678 |   Y_auto shape: (11298, 199)
+2026-06-19 16:57:34,678 |   Unique compounds: 227
+2026-06-19 16:57:34,679 |   Unique scaffolds: 182
+2026-06-19 16:57:34,679 |   Time dist: [(6, 6374), (24, 4915), (48, 9)]
+2026-06-19 16:57:34,679 | Loading CLAMP embeddings...
+2026-06-19 16:57:35,375 |   X_clamp shape: (11298, 768)
+2026-06-19 16:57:36,260 | Saved diag_cache_hamdb_autophagy.npz
+2026-06-19 16:57:36,262 | Scaffold split: train=9723, test=1575
+2026-06-19 16:57:36,278 | Training Ridge...
+2026-06-19 16:57:36,535 |   Ridge: {'overall_r2': -0.170507550239563, 'mean_gene_r2': np.float64(-0.1643933770644605), 'median_gene_r2': np.float64(-0.13898861408233643), 'mean_gene_spearman': np.float64(0.03842456227544415), 'median_gene_spearman': np.float64(0.036944773362479276), 'n_positive_r2': np.int64(2), 'n_strong_r2': np.int64(0), 'n_strong_sp': np.int64(1), 'n_genes': 199, 'model': 'Ridge'}
+2026-06-19 16:57:36,535 | Training XGBoost...
+2026-06-19 17:00:06,612 |   XGB: {'overall_r2': -0.020615458488464355, 'mean_gene_r2': np.float64(-0.032679968742869006), 'median_gene_r2': np.float64(-0.02115809917449951), 'mean_gene_spearman': np.float64(0.04559937784759933), 'median_gene_spearman': np.float64(0.044341832357959604), 'n_positive_r2': np.int64(41), 'n_strong_r2': np.int64(2), 'n_strong_sp': np.int64(3), 'n_genes': 199, 'model': 'XGB'}
+2026-06-19 17:00:06,612 | Training MLP...
+2026-06-19 17:00:07,556 |     MLP epoch 0: val_loss=0.7751
+2026-06-19 17:00:10,221 |     MLP epoch 10: val_loss=0.7756
+2026-06-19 17:00:12,985 |     MLP epoch 20: val_loss=0.7790
+2026-06-19 17:00:15,666 |     MLP epoch 30: val_loss=0.7763
+2026-06-19 17:00:18,321 |     MLP epoch 40: val_loss=0.7772
+2026-06-19 17:00:20,700 |     MLP epoch 49: val_loss=0.7775
+2026-06-19 17:00:20,812 |   MLP: {'overall_r2': 0.03281593322753906, 'mean_gene_r2': np.float64(0.01829223536965835), 'median_gene_r2': np.float64(0.009456336498260498), 'mean_gene_spearman': np.float64(0.08244983469050686), 'median_gene_spearman': np.float64(0.0730680215364342), 'n_positive_r2': np.int64(132), 'n_strong_r2': np.int64(6), 'n_strong_sp': np.int64(8), 'n_genes': 199, 'model': 'MLP'}
+2026-06-19 17:00:20,815 | 
+Saved hamdb_autophagy_smoke_results.csv
+2026-06-19 17:00:20,815 | 
+Summary:
+2026-06-19 17:00:20,817 |  overall_r2  mean_gene_r2  median_gene_r2  mean_gene_spearman  median_gene_spearman  n_positive_r2  n_strong_r2  n_strong_sp  n_genes model
+  -0.170508     -0.164393       -0.138989            0.038425              0.036945              2            0            1      199 Ridge
+  -0.020615     -0.032680       -0.021158            0.045599              0.044342             41            2            3      199   XGB
+   0.032816      0.018292        0.009456            0.082450              0.073068            132            6            8      199   MLP

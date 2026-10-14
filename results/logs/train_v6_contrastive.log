@@ -1,0 +1,217 @@
+2026-06-15 00:58:39,659 | INFO | NAFS2 Training V6 — InfoNCE & Pathway-Weighted MSE
+2026-06-15 00:58:39,659 | INFO | Device: cpu | Subset Limit: 20000 | Epochs: 50
+2026-06-15 00:58:39,659 | INFO | Loading Uni-Mol embeddings...
+2026-06-15 00:58:39,751 | INFO | Setting up DataManager...
+2026-06-15 00:58:39,751 | INFO | Loading signature metadata...
+2026-06-15 00:58:41,363 | INFO | Loading perturbagen metadata...
+2026-06-15 00:58:41,422 | INFO | Merging metadata...
+2026-06-15 00:58:41,491 | INFO | Total signatures: 473647
+2026-06-15 00:58:41,502 | INFO | With SMILES: 473626
+2026-06-15 00:58:41,514 | INFO | Unique compounds: 28927
+2026-06-15 00:58:41,523 | INFO | Cell types: 76
+2026-06-15 00:58:41,525 | INFO | Time points: [np.int64(1), np.int64(2), np.int64(3), np.int64(4), np.int64(6), np.int64(24), np.int64(48), np.int64(72), np.int64(96), np.int64(120), np.int64(144), np.int64(168)]
+2026-06-15 00:58:41,615 | INFO | Loaded 76 cell-type baselines from cell_type_baselines.npz
+2026-06-15 00:58:41,616 | INFO | Setting up Dataset with batch correction and Murcko scaffold exclusion...
+2026-06-15 00:58:41,616 | INFO | Scanning for valid signatures with SMILES and caching in memory...
+2026-06-15 00:58:41,616 | INFO | Loading GCTX in chunks of 10000 signatures...
+2026-06-15 00:58:41,616 | INFO | Reading GCTX: data/l1000/GSE92742_Broad_LINCS_Level5_COMPZ.MODZ_n473647x12328.gctx
+2026-06-15 00:58:41,621 | INFO | Reading GCTX: data/l1000/GSE92742_Broad_LINCS_Level5_COMPZ.MODZ_n473647x12328.gctx
+2026-06-15 00:58:42,133 | INFO | GCTX dimensions: 12328 genes x 473647 signatures
+2026-06-15 00:58:42,145 | INFO | First 10 genes: ['PSME1', 'ATF1', 'RHEB', 'FOXO3', 'RHOA', 'IL1B', 'ASAH1', 'RALA', 'ARHGEF12', 'SOX2']
+2026-06-15 00:58:42,145 | INFO | Critical autophagy genes present: 9/9
+2026-06-15 00:58:42,146 | INFO | Loading chunk 0:10000...
+2026-06-15 00:58:42,146 | INFO | Reading GCTX: data/l1000/GSE92742_Broad_LINCS_Level5_COMPZ.MODZ_n473647x12328.gctx
+2026-06-15 00:58:46,530 | INFO | Chunk 1: 10000 with SMILES, 940 valid
+2026-06-15 00:58:46,605 | INFO | Loading chunk 10000:20000...
+2026-06-15 00:58:46,605 | INFO | Reading GCTX: data/l1000/GSE92742_Broad_LINCS_Level5_COMPZ.MODZ_n473647x12328.gctx
+2026-06-15 00:58:50,269 | INFO | Chunk 2: 10000 with SMILES, 890 valid
+2026-06-15 00:58:50,340 | INFO | Loading chunk 20000:30000...
+2026-06-15 00:58:50,340 | INFO | Reading GCTX: data/l1000/GSE92742_Broad_LINCS_Level5_COMPZ.MODZ_n473647x12328.gctx
+2026-06-15 00:58:52,334 | INFO | Chunk 3: 10000 with SMILES, 761 valid
+2026-06-15 00:58:52,411 | INFO | Loading chunk 30000:40000...
+2026-06-15 00:58:52,411 | INFO | Reading GCTX: data/l1000/GSE92742_Broad_LINCS_Level5_COMPZ.MODZ_n473647x12328.gctx
+2026-06-15 00:58:54,473 | INFO | Chunk 4: 10000 with SMILES, 853 valid
+2026-06-15 00:58:54,543 | INFO | Loading chunk 40000:50000...
+2026-06-15 00:58:54,543 | INFO | Reading GCTX: data/l1000/GSE92742_Broad_LINCS_Level5_COMPZ.MODZ_n473647x12328.gctx
+2026-06-15 00:58:57,021 | INFO | Chunk 5: 10000 with SMILES, 889 valid
+2026-06-15 00:58:57,089 | INFO | Loading chunk 50000:60000...
+2026-06-15 00:58:57,089 | INFO | Reading GCTX: data/l1000/GSE92742_Broad_LINCS_Level5_COMPZ.MODZ_n473647x12328.gctx
+2026-06-15 00:58:59,529 | INFO | Chunk 6: 10000 with SMILES, 946 valid
+2026-06-15 00:58:59,598 | INFO | Loading chunk 60000:70000...
+2026-06-15 00:58:59,598 | INFO | Reading GCTX: data/l1000/GSE92742_Broad_LINCS_Level5_COMPZ.MODZ_n473647x12328.gctx
+2026-06-15 00:59:01,406 | INFO | Chunk 7: 10000 with SMILES, 983 valid
+2026-06-15 00:59:01,473 | INFO | Loading chunk 70000:80000...
+2026-06-15 00:59:01,473 | INFO | Reading GCTX: data/l1000/GSE92742_Broad_LINCS_Level5_COMPZ.MODZ_n473647x12328.gctx
+2026-06-15 00:59:04,208 | INFO | Chunk 8: 10000 with SMILES, 928 valid
+2026-06-15 00:59:04,276 | INFO | Loading chunk 80000:90000...
+2026-06-15 00:59:04,276 | INFO | Reading GCTX: data/l1000/GSE92742_Broad_LINCS_Level5_COMPZ.MODZ_n473647x12328.gctx
+2026-06-15 00:59:06,603 | INFO | Chunk 9: 10000 with SMILES, 925 valid
+2026-06-15 00:59:06,670 | INFO | Loading chunk 90000:100000...
+2026-06-15 00:59:06,670 | INFO | Reading GCTX: data/l1000/GSE92742_Broad_LINCS_Level5_COMPZ.MODZ_n473647x12328.gctx
+2026-06-15 00:59:08,628 | INFO | Chunk 10: 10000 with SMILES, 979 valid
+2026-06-15 00:59:08,710 | INFO | Loading chunk 100000:110000...
+2026-06-15 00:59:08,710 | INFO | Reading GCTX: data/l1000/GSE92742_Broad_LINCS_Level5_COMPZ.MODZ_n473647x12328.gctx
+2026-06-15 00:59:11,754 | INFO | Chunk 11: 10000 with SMILES, 676 valid
+2026-06-15 00:59:11,822 | INFO | Loading chunk 110000:120000...
+2026-06-15 00:59:11,822 | INFO | Reading GCTX: data/l1000/GSE92742_Broad_LINCS_Level5_COMPZ.MODZ_n473647x12328.gctx
+2026-06-15 00:59:14,109 | INFO | Chunk 12: 10000 with SMILES, 808 valid
+2026-06-15 00:59:14,178 | INFO | Loading chunk 120000:130000...
+2026-06-15 00:59:14,178 | INFO | Reading GCTX: data/l1000/GSE92742_Broad_LINCS_Level5_COMPZ.MODZ_n473647x12328.gctx
+2026-06-15 00:59:16,332 | INFO | Chunk 13: 10000 with SMILES, 953 valid
+2026-06-15 00:59:16,458 | INFO | Loading chunk 130000:140000...
+2026-06-15 00:59:16,459 | INFO | Reading GCTX: data/l1000/GSE92742_Broad_LINCS_Level5_COMPZ.MODZ_n473647x12328.gctx
+2026-06-15 00:59:18,927 | INFO | Chunk 14: 10000 with SMILES, 976 valid
+2026-06-15 00:59:18,999 | INFO | Loading chunk 140000:150000...
+2026-06-15 00:59:18,999 | INFO | Reading GCTX: data/l1000/GSE92742_Broad_LINCS_Level5_COMPZ.MODZ_n473647x12328.gctx
+2026-06-15 00:59:20,912 | INFO | Chunk 15: 10000 with SMILES, 1013 valid
+2026-06-15 00:59:20,982 | INFO | Loading chunk 150000:160000...
+2026-06-15 00:59:20,983 | INFO | Reading GCTX: data/l1000/GSE92742_Broad_LINCS_Level5_COMPZ.MODZ_n473647x12328.gctx
+2026-06-15 00:59:22,817 | INFO | Chunk 16: 10000 with SMILES, 992 valid
+2026-06-15 00:59:22,885 | INFO | Loading chunk 160000:170000...
+2026-06-15 00:59:22,885 | INFO | Reading GCTX: data/l1000/GSE92742_Broad_LINCS_Level5_COMPZ.MODZ_n473647x12328.gctx
+2026-06-15 00:59:24,739 | INFO | Chunk 17: 9996 with SMILES, 685 valid
+2026-06-15 00:59:24,809 | INFO | Loading chunk 170000:180000...
+2026-06-15 00:59:24,809 | INFO | Reading GCTX: data/l1000/GSE92742_Broad_LINCS_Level5_COMPZ.MODZ_n473647x12328.gctx
+2026-06-15 00:59:27,758 | INFO | Chunk 18: 9983 with SMILES, 0 valid
+2026-06-15 00:59:27,826 | INFO | Loading chunk 180000:190000...
+2026-06-15 00:59:27,826 | INFO | Reading GCTX: data/l1000/GSE92742_Broad_LINCS_Level5_COMPZ.MODZ_n473647x12328.gctx
+2026-06-15 00:59:29,192 | INFO | Chunk 19: 10000 with SMILES, 0 valid
+2026-06-15 00:59:29,261 | INFO | Loading chunk 190000:200000...
+2026-06-15 00:59:29,261 | INFO | Reading GCTX: data/l1000/GSE92742_Broad_LINCS_Level5_COMPZ.MODZ_n473647x12328.gctx
+2026-06-15 00:59:30,782 | INFO | Chunk 20: 10000 with SMILES, 0 valid
+2026-06-15 00:59:30,853 | INFO | Loading chunk 200000:210000...
+2026-06-15 00:59:30,853 | INFO | Reading GCTX: data/l1000/GSE92742_Broad_LINCS_Level5_COMPZ.MODZ_n473647x12328.gctx
+2026-06-15 00:59:32,720 | INFO | Chunk 21: 10000 with SMILES, 0 valid
+2026-06-15 00:59:32,789 | INFO | Loading chunk 210000:220000...
+2026-06-15 00:59:32,789 | INFO | Reading GCTX: data/l1000/GSE92742_Broad_LINCS_Level5_COMPZ.MODZ_n473647x12328.gctx
+2026-06-15 00:59:34,171 | INFO | Chunk 22: 10000 with SMILES, 0 valid
+2026-06-15 00:59:34,240 | INFO | Loading chunk 220000:230000...
+2026-06-15 00:59:34,241 | INFO | Reading GCTX: data/l1000/GSE92742_Broad_LINCS_Level5_COMPZ.MODZ_n473647x12328.gctx
+2026-06-15 00:59:35,837 | INFO | Chunk 23: 10000 with SMILES, 0 valid
+2026-06-15 00:59:35,905 | INFO | Loading chunk 230000:240000...
+2026-06-15 00:59:35,906 | INFO | Reading GCTX: data/l1000/GSE92742_Broad_LINCS_Level5_COMPZ.MODZ_n473647x12328.gctx
+2026-06-15 00:59:37,427 | INFO | Chunk 24: 10000 with SMILES, 0 valid
+2026-06-15 00:59:37,497 | INFO | Loading chunk 240000:250000...
+2026-06-15 00:59:37,497 | INFO | Reading GCTX: data/l1000/GSE92742_Broad_LINCS_Level5_COMPZ.MODZ_n473647x12328.gctx
+2026-06-15 00:59:38,834 | INFO | Chunk 25: 10000 with SMILES, 0 valid
+2026-06-15 00:59:38,904 | INFO | Loading chunk 250000:260000...
+2026-06-15 00:59:38,905 | INFO | Reading GCTX: data/l1000/GSE92742_Broad_LINCS_Level5_COMPZ.MODZ_n473647x12328.gctx
+2026-06-15 00:59:40,342 | INFO | Chunk 26: 10000 with SMILES, 0 valid
+2026-06-15 00:59:40,411 | INFO | Loading chunk 260000:270000...
+2026-06-15 00:59:40,411 | INFO | Reading GCTX: data/l1000/GSE92742_Broad_LINCS_Level5_COMPZ.MODZ_n473647x12328.gctx
+2026-06-15 00:59:41,796 | INFO | Chunk 27: 10000 with SMILES, 0 valid
+2026-06-15 00:59:41,864 | INFO | Loading chunk 270000:280000...
+2026-06-15 00:59:41,864 | INFO | Reading GCTX: data/l1000/GSE92742_Broad_LINCS_Level5_COMPZ.MODZ_n473647x12328.gctx
+2026-06-15 00:59:43,148 | INFO | Chunk 28: 10000 with SMILES, 0 valid
+2026-06-15 00:59:43,218 | INFO | Loading chunk 280000:290000...
+2026-06-15 00:59:43,218 | INFO | Reading GCTX: data/l1000/GSE92742_Broad_LINCS_Level5_COMPZ.MODZ_n473647x12328.gctx
+2026-06-15 00:59:44,418 | INFO | Chunk 29: 10000 with SMILES, 0 valid
+2026-06-15 00:59:44,487 | INFO | Loading chunk 290000:300000...
+2026-06-15 00:59:44,487 | INFO | Reading GCTX: data/l1000/GSE92742_Broad_LINCS_Level5_COMPZ.MODZ_n473647x12328.gctx
+2026-06-15 00:59:45,648 | INFO | Chunk 30: 10000 with SMILES, 0 valid
+2026-06-15 00:59:45,720 | INFO | Loading chunk 300000:310000...
+2026-06-15 00:59:45,720 | INFO | Reading GCTX: data/l1000/GSE92742_Broad_LINCS_Level5_COMPZ.MODZ_n473647x12328.gctx
+2026-06-15 00:59:46,980 | INFO | Chunk 31: 10000 with SMILES, 0 valid
+2026-06-15 00:59:47,050 | INFO | Loading chunk 310000:320000...
+2026-06-15 00:59:47,050 | INFO | Reading GCTX: data/l1000/GSE92742_Broad_LINCS_Level5_COMPZ.MODZ_n473647x12328.gctx
+2026-06-15 00:59:48,119 | INFO | Chunk 32: 10000 with SMILES, 0 valid
+2026-06-15 00:59:48,188 | INFO | Loading chunk 320000:330000...
+2026-06-15 00:59:48,188 | INFO | Reading GCTX: data/l1000/GSE92742_Broad_LINCS_Level5_COMPZ.MODZ_n473647x12328.gctx
+2026-06-15 00:59:49,551 | INFO | Chunk 33: 10000 with SMILES, 486 valid
+2026-06-15 00:59:49,621 | INFO | Loading chunk 330000:340000...
+2026-06-15 00:59:49,621 | INFO | Reading GCTX: data/l1000/GSE92742_Broad_LINCS_Level5_COMPZ.MODZ_n473647x12328.gctx
+2026-06-15 00:59:50,886 | INFO | Chunk 34: 10000 with SMILES, 772 valid
+2026-06-15 00:59:50,956 | INFO | Loading chunk 340000:350000...
+2026-06-15 00:59:50,956 | INFO | Reading GCTX: data/l1000/GSE92742_Broad_LINCS_Level5_COMPZ.MODZ_n473647x12328.gctx
+2026-06-15 00:59:52,451 | INFO | Chunk 35: 10000 with SMILES, 64 valid
+2026-06-15 00:59:52,522 | INFO | Loading chunk 350000:360000...
+2026-06-15 00:59:52,522 | INFO | Reading GCTX: data/l1000/GSE92742_Broad_LINCS_Level5_COMPZ.MODZ_n473647x12328.gctx
+2026-06-15 00:59:53,727 | INFO | Chunk 36: 10000 with SMILES, 115 valid
+2026-06-15 00:59:53,798 | INFO | Loading chunk 360000:370000...
+2026-06-15 00:59:53,799 | INFO | Reading GCTX: data/l1000/GSE92742_Broad_LINCS_Level5_COMPZ.MODZ_n473647x12328.gctx
+2026-06-15 00:59:54,910 | INFO | Chunk 37: 10000 with SMILES, 206 valid
+2026-06-15 00:59:54,980 | INFO | Loading chunk 370000:380000...
+2026-06-15 00:59:54,980 | INFO | Reading GCTX: data/l1000/GSE92742_Broad_LINCS_Level5_COMPZ.MODZ_n473647x12328.gctx
+2026-06-15 00:59:56,245 | INFO | Chunk 38: 10000 with SMILES, 0 valid
+2026-06-15 00:59:56,316 | INFO | Loading chunk 380000:390000...
+2026-06-15 00:59:56,317 | INFO | Reading GCTX: data/l1000/GSE92742_Broad_LINCS_Level5_COMPZ.MODZ_n473647x12328.gctx
+2026-06-15 00:59:57,365 | INFO | Chunk 39: 10000 with SMILES, 0 valid
+2026-06-15 00:59:57,436 | INFO | Loading chunk 390000:400000...
+2026-06-15 00:59:57,436 | INFO | Reading GCTX: data/l1000/GSE92742_Broad_LINCS_Level5_COMPZ.MODZ_n473647x12328.gctx
+2026-06-15 00:59:58,572 | INFO | Chunk 40: 10000 with SMILES, 0 valid
+2026-06-15 00:59:58,644 | INFO | Loading chunk 400000:410000...
+2026-06-15 00:59:58,644 | INFO | Reading GCTX: data/l1000/GSE92742_Broad_LINCS_Level5_COMPZ.MODZ_n473647x12328.gctx
+2026-06-15 00:59:59,726 | INFO | Chunk 41: 10000 with SMILES, 0 valid
+2026-06-15 00:59:59,796 | INFO | Loading chunk 410000:420000...
+2026-06-15 00:59:59,797 | INFO | Reading GCTX: data/l1000/GSE92742_Broad_LINCS_Level5_COMPZ.MODZ_n473647x12328.gctx
+2026-06-15 01:00:00,981 | INFO | Chunk 42: 10000 with SMILES, 0 valid
+2026-06-15 01:00:01,051 | INFO | Loading chunk 420000:430000...
+2026-06-15 01:00:01,052 | INFO | Reading GCTX: data/l1000/GSE92742_Broad_LINCS_Level5_COMPZ.MODZ_n473647x12328.gctx
+2026-06-15 01:00:02,130 | INFO | Chunk 43: 10000 with SMILES, 11 valid
+2026-06-15 01:00:02,200 | INFO | Loading chunk 430000:440000...
+2026-06-15 01:00:02,200 | INFO | Reading GCTX: data/l1000/GSE92742_Broad_LINCS_Level5_COMPZ.MODZ_n473647x12328.gctx
+2026-06-15 01:00:03,631 | INFO | Chunk 44: 10000 with SMILES, 526 valid
+2026-06-15 01:00:03,704 | INFO | Loading chunk 440000:450000...
+2026-06-15 01:00:03,705 | INFO | Reading GCTX: data/l1000/GSE92742_Broad_LINCS_Level5_COMPZ.MODZ_n473647x12328.gctx
+2026-06-15 01:00:04,993 | INFO | Chunk 45: 10000 with SMILES, 703 valid
+2026-06-15 01:00:05,064 | INFO | Loading chunk 450000:460000...
+2026-06-15 01:00:05,064 | INFO | Reading GCTX: data/l1000/GSE92742_Broad_LINCS_Level5_COMPZ.MODZ_n473647x12328.gctx
+2026-06-15 01:00:06,567 | INFO | Chunk 46: 10000 with SMILES, 214 valid
+2026-06-15 01:00:06,638 | INFO | Loading chunk 460000:470000...
+2026-06-15 01:00:06,639 | INFO | Reading GCTX: data/l1000/GSE92742_Broad_LINCS_Level5_COMPZ.MODZ_n473647x12328.gctx
+2026-06-15 01:00:08,230 | INFO | Chunk 47: 10000 with SMILES, 60 valid
+2026-06-15 01:00:08,303 | INFO | Loading chunk 470000:473647...
+2026-06-15 01:00:08,303 | INFO | Reading GCTX: data/l1000/GSE92742_Broad_LINCS_Level5_COMPZ.MODZ_n473647x12328.gctx
+2026-06-15 01:00:08,969 | INFO | Chunk 48: 3647 with SMILES, 128 valid
+2026-06-15 01:00:09,212 | INFO | Total valid signatures loaded in memory: 18482
+2026-06-15 01:00:09,218 | INFO | Splitting dataset by Murcko scaffolds for OOD validation...
+2026-06-15 01:00:12,839 | INFO | Split: 17333 train samples, 1149 validation samples.
+2026-06-15 01:00:13,272 | INFO | Beginning Training...
+2026-06-15 01:00:13,272 | INFO | Epoch 1/50 | Lambda = 0.1667
+2026-06-15 01:00:13,370 | INFO |   Batch 0/67 | Total: 1.5704 | MSE: 0.6467 | Contra: 5.5422
+2026-06-15 01:00:14,965 | INFO | Epoch 1 Done | Train Total Loss: 0.6063 | Train MSE: 0.2500 | Train Contra: 2.1377 | Val MSE: 0.6613
+2026-06-15 01:00:14,972 | INFO |   → New best validation model saved (val_loss=0.6613)
+2026-06-15 01:00:14,972 | INFO | Epoch 2/50 | Lambda = 0.3333
+2026-06-15 01:00:15,031 | INFO |   Batch 0/67 | Total: 2.4974 | MSE: 0.6579 | Contra: 5.5183
+2026-06-15 01:00:16,772 | INFO | Epoch 2 Done | Train Total Loss: 0.9613 | Train MSE: 0.2518 | Train Contra: 2.1287 | Val MSE: 0.6560
+2026-06-15 01:00:16,781 | INFO |   → New best validation model saved (val_loss=0.6560)
+2026-06-15 01:00:16,781 | INFO | Epoch 3/50 | Lambda = 0.5000
+2026-06-15 01:00:16,833 | INFO |   Batch 0/67 | Total: 3.4647 | MSE: 0.7138 | Contra: 5.5018
+2026-06-15 01:00:18,462 | INFO | Epoch 3 Done | Train Total Loss: 1.3097 | Train MSE: 0.2516 | Train Contra: 2.1161 | Val MSE: 0.6533
+2026-06-15 01:00:18,470 | INFO |   → New best validation model saved (val_loss=0.6533)
+2026-06-15 01:00:18,470 | INFO | Epoch 4/50 | Lambda = 0.5000
+2026-06-15 01:00:18,549 | INFO |   Batch 0/67 | Total: 3.3433 | MSE: 0.6130 | Contra: 5.4606
+2026-06-15 01:00:20,144 | INFO | Epoch 4 Done | Train Total Loss: 1.3093 | Train MSE: 0.2554 | Train Contra: 2.1077 | Val MSE: 0.6496
+2026-06-15 01:00:20,154 | INFO |   → New best validation model saved (val_loss=0.6496)
+2026-06-15 01:00:20,155 | INFO | Epoch 5/50 | Lambda = 0.5000
+2026-06-15 01:00:20,235 | INFO |   Batch 0/67 | Total: 3.2728 | MSE: 0.5689 | Contra: 5.4078
+2026-06-15 01:00:21,827 | INFO | Epoch 5 Done | Train Total Loss: 1.3007 | Train MSE: 0.2512 | Train Contra: 2.0989 | Val MSE: 0.6566
+2026-06-15 01:00:21,827 | INFO | Epoch 6/50 | Lambda = 0.5000
+2026-06-15 01:00:21,879 | INFO |   Batch 0/67 | Total: 3.4150 | MSE: 0.7051 | Contra: 5.4198
+2026-06-15 01:00:23,533 | INFO | Epoch 6 Done | Train Total Loss: 1.2997 | Train MSE: 0.2536 | Train Contra: 2.0923 | Val MSE: 0.6630
+2026-06-15 01:00:23,533 | INFO | Epoch 7/50 | Lambda = 0.5000
+2026-06-15 01:00:23,597 | INFO |   Batch 0/67 | Total: 3.3845 | MSE: 0.6706 | Contra: 5.4278
+2026-06-15 01:00:25,183 | INFO | Epoch 7 Done | Train Total Loss: 1.2947 | Train MSE: 0.2497 | Train Contra: 2.0901 | Val MSE: 0.6670
+2026-06-15 01:00:25,184 | INFO | Epoch 8/50 | Lambda = 0.5000
+2026-06-15 01:00:25,238 | INFO |   Batch 0/67 | Total: 3.3819 | MSE: 0.6736 | Contra: 5.4165
+2026-06-15 01:00:27,034 | INFO | Epoch 8 Done | Train Total Loss: 1.2923 | Train MSE: 0.2500 | Train Contra: 2.0847 | Val MSE: 0.6593
+2026-06-15 01:00:27,034 | INFO | Epoch 9/50 | Lambda = 0.5000
+2026-06-15 01:00:27,089 | INFO |   Batch 0/67 | Total: 3.3492 | MSE: 0.6415 | Contra: 5.4153
+2026-06-15 01:00:28,659 | INFO | Epoch 9 Done | Train Total Loss: 1.2927 | Train MSE: 0.2500 | Train Contra: 2.0854 | Val MSE: 0.6567
+2026-06-15 01:00:28,660 | INFO | Epoch 10/50 | Lambda = 0.5000
+2026-06-15 01:00:28,722 | INFO |   Batch 0/67 | Total: 3.2946 | MSE: 0.6032 | Contra: 5.3828
+2026-06-15 01:00:30,285 | INFO | Epoch 10 Done | Train Total Loss: 1.2908 | Train MSE: 0.2485 | Train Contra: 2.0847 | Val MSE: 0.6551
+2026-06-15 01:00:30,286 | INFO | Epoch 11/50 | Lambda = 0.5000
+2026-06-15 01:00:30,348 | INFO |   Batch 0/67 | Total: 3.3049 | MSE: 0.6055 | Contra: 5.3986
+2026-06-15 01:00:31,986 | INFO | Epoch 11 Done | Train Total Loss: 1.2894 | Train MSE: 0.2486 | Train Contra: 2.0816 | Val MSE: 0.6506
+2026-06-15 01:00:31,986 | INFO | Epoch 12/50 | Lambda = 0.4800
+2026-06-15 01:00:32,044 | INFO |   Batch 0/67 | Total: 3.2903 | MSE: 0.7158 | Contra: 5.3634
+2026-06-15 01:00:33,620 | INFO | Epoch 12 Done | Train Total Loss: 1.2528 | Train MSE: 0.2561 | Train Contra: 2.0766 | Val MSE: 0.6576
+2026-06-15 01:00:33,621 | INFO | Epoch 13/50 | Lambda = 0.4600
+2026-06-15 01:00:33,676 | INFO |   Batch 0/67 | Total: 3.0585 | MSE: 0.5928 | Contra: 5.3602
+2026-06-15 01:00:35,331 | INFO | Epoch 13 Done | Train Total Loss: 1.2061 | Train MSE: 0.2535 | Train Contra: 2.0708 | Val MSE: 0.6535
+2026-06-15 01:00:35,332 | INFO | Epoch 14/50 | Lambda = 0.4400
+2026-06-15 01:00:35,387 | INFO |   Batch 0/67 | Total: 3.0179 | MSE: 0.6578 | Contra: 5.3639
+2026-06-15 01:00:37,167 | INFO | Epoch 14 Done | Train Total Loss: 1.1611 | Train MSE: 0.2513 | Train Contra: 2.0677 | Val MSE: 0.6528
+2026-06-15 01:00:37,167 | INFO |   → Early stopping triggered! No improvement in validation MSE for 10 epochs.
+2026-06-15 01:00:37,173 | INFO | Training complete.

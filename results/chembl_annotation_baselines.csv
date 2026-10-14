@@ -1,0 +1,4 @@
+annotation,n_compounds,n_total,pct
+autophagy_active,176,99433,0.1770
+mtor_pi3k_target,242,99433,0.2434
+lysosomal_target,2,99433,0.0020

@@ -235,27 +235,74 @@ def make_fig4():
 
 
 # ---------------------------------------------------------------- fig5
+def _smarts_to_img(smarts):
+    """Render a SMARTS substructure as a PIL image; None if it cannot be drawn."""
+    from rdkit import Chem
+    from rdkit.Chem import Draw
+    mol = Chem.MolFromSmarts(str(smarts))
+    if mol is None or mol.GetNumAtoms() == 0:
+        return None
+    try:
+        return Draw.MolToImage(mol, size=(320, 240))
+    except Exception:
+        pass
+    try:
+        import io
+        from PIL import Image
+        from rdkit.Chem.Draw import rdMolDraw2D
+        d = rdMolDraw2D.MolDraw2DCairo(320, 240)
+        d.drawOptions().prepareMolsBeforeDrawing = False
+        rdMolDraw2D.PrepareAndDrawMolecule(d, mol)
+        d.FinishDrawing()
+        return Image.open(io.BytesIO(d.GetDrawingText()))
+    except Exception:
+        return None
+
+
 def make_fig5():
     df = pd.read_csv(WORK_DIR / 'paper' / 'paper_feature_importance.csv')
     df = df.sort_values('gain', ascending=False).head(15)
     df = df.iloc[::-1]  # largest gain on top for barh
 
-    labels = []
-    for _, row in df.iterrows():
-        smarts = str(row['smarts'])
-        if len(smarts) > 22:
-            smarts = smarts[:21] + '…'
-        labels.append(f"bit {int(row['bit'])} · {smarts}")
-
     colors = [OI['green'] if fe >= 1 else OI['vermillion']
               for fe in df['fold_enrichment']]
 
-    fig, ax = plt.subplots(figsize=(3.5, 4.2))
-    ax.barh(np.arange(len(df)), df['gain'], color=colors, height=0.7)
-    ax.set_yticks(np.arange(len(df)))
-    ax.set_yticklabels(labels, fontsize=6.5)
+    n = len(df)
+    row_h = 0.42          # inches per row
+    fig_w, fig_h = 6.6, 0.9 + n * row_h
+    img_frac_w = 0.30     # figure fraction reserved for structure depictions
+    fig, ax = plt.subplots(figsize=(fig_w, fig_h))
+    fig.subplots_adjust(left=img_frac_w + 0.05, right=0.97, top=0.97, bottom=0.13)
+
+    y = np.arange(n)
+    ax.barh(y, df['gain'], color=colors, height=0.72)
+    ax.set_yticks([])
+    ax.set_ylim(-0.6, n - 0.4)
     ax.axvline(0, color='black', linewidth=0.5, zorder=3)
     ax.set_xlabel('XGBoost gain')
+    ax.set_xlim(0, df['gain'].max() * 1.22)
+
+    ax_pos = ax.get_position()
+    slot_h = ax_pos.height / n
+    for yi, (_, row) in zip(y, df.iterrows()):
+        ax.text(row['gain'] + df['gain'].max() * 0.015, yi,
+                f"{row['gain']:.1f}", va='center', fontsize=7, color='black')
+        img = _smarts_to_img(row['smarts'])
+        cy = ax_pos.y0 + (yi + 0.6) / n * ax_pos.height  # row centre, figure fraction
+        if img is not None:
+            pw, ph = img.size
+            h = slot_h * 0.80
+            w = h * (fig_h / fig_w) * (pw / ph)
+            cx = img_frac_w
+            iax = fig.add_axes([cx - w, cy - h / 2, w, h])
+            iax.imshow(img)
+            iax.axis('off')
+            cap_x = cx - w / 2
+        else:
+            cap_x = img_frac_w / 2
+        fig.text(cap_x, cy - slot_h * 0.40,
+                 f"bit {int(row['bit'])}",
+                 va='top', ha='center', fontsize=6, color='#444444')
 
     from matplotlib.patches import Patch
     legend_handles = [

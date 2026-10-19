@@ -564,7 +564,7 @@ def main():
     df_results_csv = df_results.drop(columns=[c for c in df_results.columns
                                                if c in ('compound_fpr', 'compound_tpr', 'compound_thresholds')],
                                      errors='ignore')
-    df_results_csv.to_csv('hamdb_binary_xgb_results.csv', index=False)
+    df_results_csv.to_csv('results/hamdb_binary_xgb_results.csv', index=False)
     logger.info(f"\nSaved hamdb_binary_xgb_results.csv")
 
     # Save ROC curves for figure generation
@@ -574,9 +574,9 @@ def main():
         name = res['feature_set']
         roc_data[name] = np.vstack([res['compound_fpr'], res['compound_tpr'], res['compound_thresholds']])
         auroc_records.append({'model': name, 'auroc': res['compound_auroc']})
-    np.savez('hamdb_binary_roc_curves.npz', **roc_data,
+    np.savez('results/hamdb_binary_roc_curves.npz', **roc_data,
              aurocs=np.array([(r['model'], r['auroc']) for r in auroc_records], dtype=object))
-    pd.DataFrame(auroc_records).to_csv('hamdb_binary_roc_curves.csv', index=False)
+    pd.DataFrame(auroc_records).to_csv('results/hamdb_binary_roc_curves.csv', index=False)
     logger.info("Saved hamdb_binary_roc_curves.npz and hamdb_binary_roc_curves.csv")
 
     logger.info("\nSummary:")

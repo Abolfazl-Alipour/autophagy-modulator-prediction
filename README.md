@@ -6,96 +6,73 @@ Code and data for the preprint:
 > Transcriptome Collapse to Morgan Fingerprint Classifiers* (bioRxiv, 2026).
 
 Archived at **https://doi.org/10.5281/zenodo.22986834** (concept DOI, always
-resolves to the latest version). 
+resolves to the latest version).
 
-This repositorycontains every script, label set, trained model, result table, and report
-needed to replicate all figures and numbers in the paper. Raw LINCS L1000
-data (GSE92742, ~4 GB download) is the only external input; everything else
-is either included or fetched by the scripts.
+This repository contains every script, label set, trained model, and result
+table needed to replicate all figures and numbers in the paper. Raw LINCS L1000
+data (GSE92742, ~4 GB download) is the only external input; everything else is
+either included or fetched by the scripts.
 
 ## Layout
 
 | Path | Contents |
 |---|---|
+| `pipeline/` | All analysis code (31 scripts). The `Makefile` calls them in the correct order; nothing here needs to be run by hand. |
 | `paper/` | Manuscript (`main.tex`, `main.pdf`), all figures (vector PDF + PNG), cached Fig 1 data, bootstrap-CI and feature-importance tables |
-| `data/` | `hamdb_autophagy_directions.csv` (514 activators / 132 inhibitors / 167 neutral), `chembl_neutral_candidates.csv` (99,434 compounds), `autophagy_genes.txt` (199-gene set), `curated_phenotypes.csv`; see `data/README.md` for the L1000 download |
+| `data/` | `hamdb_chemicals.csv` + `hamdb_autophagy_directions.csv` (514 activators / 132 inhibitors / 167 neutral), `chembl_neutral_candidates.csv` (99,434 compounds), `chembl_autophagy_exclusion_ids.json`, `context_binary_l1000_compounds.csv`, `autophagy_genes.txt`, `flux_informative_genes.csv`, `curated_phenotypes.csv`; see `data/README.md` for the L1000 download |
 | `models/` | Trained weights: V6 transcriptome model (`nafs2_best_v6.pt`), its Uni-Mol embedding cache, both binary XGBoost classifiers, both 3-class classifiers, cascade direction model |
-| `results/` | All result tables (`binary_models_comparison.csv`, `chembl_enrichment_morgan_vs_clamp.csv`, ROC-curve arrays, …) and `reports/` with the full audit trail (per-task reports, V6 post-mortem, signature teardown, blog corrections) |
-| `*.py` (root) | The pipeline, staged below |
+| `results/` | All result tables, ROC-curve arrays, `logs/` (trimmed training/build logs), and `reports/` (audit trail) |
+| `docs/` | `MANUSCRIPT_FACTCHECK.md` (Q1–Q20 claim verification) and `REVIEW_RESPONSES.md` (point-by-point audit responses) |
 
-## Reproduction pipeline
+## Quick start
 
-**Quick start (figures + statistics, no L1000 download needed):**
 ```bash
-./setup.sh        # venv, deps, CLAMP + checkpoint, input checks
-make figures      # regenerate all 5 paper figures from the included caches
-make stats        # bootstrap AUROC CIs + feature importance (seed-deterministic)
+./setup.sh     # venv, deps, CLAMP checkpoint download, input checks (one time)
+make full      # every manuscript statistic + all 5 figures, from included caches
 ```
 
-**Full pipeline from raw data.** Run from the repository root. All splits are
-seeded (42); the reconstructed scaffold evaluation is additionally
-deterministic (`PYTHONHASHSEED=0`, set automatically by the `Makefile`).
+`make full` takes minutes and needs no L1000 download. `make paper` recompiles
+the manuscript (tectonic or TeX Live).
 
-**1. Data curation**
-```bash
-python curate_hamdb_directions.py        # HAMdb labels -> data/hamdb_autophagy_directions.csv
-python curate_autophagy_genes.py         # 199-gene pathway set -> data/autophagy_genes.txt
-python fetch_chembl_pubchem_neutrals.py  # ChEMBL neutral library -> data/chembl_neutral_candidates.csv
-# Download GSE92742 Level-5 files into data/l1000/ (see data/README.md)
-```
+## Full pipeline from raw data
 
-**2. Transcriptome regression and collapse audit (paper §3.1, Fig. 1)**
-```bash
-python embed_unimol.py                   # Uni-Mol embeddings for L1000 compounds
-python train_v6_contrastive.py           # train the V6 structure->12,328-gene model
-python analyze_v6_results.py             # control audit: Rapamycin/Wortmannin Spearman
-python verify_rapa_targets.py            # ground-truth target spot-checks
-python diag_1_linear_baselines.py        # ridge upper bounds, genome-wide scan
-python extract_fig1_data.py              # cache Fig 1 panels -> paper/fig1_data.npz
-```
+Run from the repository root, in this order (or stage by stage:
+`make data`, `make embeddings`, `make train`, `make classify`, `make analyze`,
+then `make stats figures`). All splits are seeded (42); the reconstructed
+scaffold evaluation is additionally deterministic (`PYTHONHASHSEED=0`, exported
+by the `Makefile`).
 
-**3. Signature matching (paper §3.5)**
-```bash
-python extract_autophagy_signatures.py       # v1 mean-signature inverse search
-python extract_autophagy_signatures_v2.py    # reviewed v2 redesign (contrastive, per-cell)
-python diagnose_autophagy_signatures.py      # split-half / random-compound diagnostics
-python flux_informed_signature_and_assay_integration.py  # 25-gene flux core + ChEMBL assays
-python annotate_autophagy_signature_hits.py
-```
-
-**4. Binary modulator classification (paper §3.2, Fig. 2, Table 1)**
-```bash
-python generate_clamp_embeddings.py      # 768-d CLAMP embeddings
-python hamdb_binary_classifier_xgb.py    # L1000-context models (227 vs 227, scaffold split)
-python train_3class_autophagy_classifier.py  # structure-only binary + 3-class (646 vs 5,893)
-python cascade_autophagy_classifier.py   # two-stage cascade + direction model
-python direction_feature_ablation.py     # representation ablation for direction
-python generate_roc_curves.py            # reconstructed scaffold split, ROC arrays
-```
-
-**5. External validation on ChEMBL (paper §3.3, Fig. 3, Table 2)**
-```bash
-python analyze_chembl_hits.py                    # threshold enrichment (Morgan-only model)
-python compare_chembl_clamp_morgan_enrichment.py # head-to-head Morgan vs Morgan+CLAMP
-```
-
-**6. Statistics and figures for the paper**
-```bash
-PYTHONHASHSEED=0 python paper_bootstrap_ci.py    # retrain + 1000x bootstrap AUROC CIs
-python paper_feature_importance.py               # top Morgan bits -> SMARTS + fold enrichment
-python make_journal_figures.py                   # regenerates all 5 figures (PDF + PNG)
-```
+1. **Data curation** — `make data`
+   (`curate_hamdb_directions.py`, `curate_autophagy_genes.py`,
+   `fetch_chembl_pubchem_neutrals.py`; plus the GSE92742 download, see
+   `data/README.md`)
+2. **Transcriptome regression + collapse audit** — `make embeddings train`
+   (`embed_unimol.py`, `train_v6_contrastive.py`, `analyze_v6_results.py`,
+   `diag_*` ridge/probe diagnostics, `extract_fig1_data.py`; paper §3.1, Fig. 1)
+3. **Signature matching** — `make analyze`
+   (`extract_autophagy_signatures*.py`, `diagnose_autophagy_signatures.py`,
+   `flux_informed_signature_and_assay_integration.py`; paper §3.5)
+4. **Binary modulator classification** — `make classify`
+   (`generate_clamp_embeddings.py`, `hamdb_binary_classifier_xgb.py`,
+   `train_3class_autophagy_classifier.py`, `cascade_autophagy_classifier.py`,
+   `direction_feature_ablation.py`, `generate_roc_curves.py`; paper §3.2, Fig. 2)
+5. **External validation on ChEMBL** — part of `make analyze`
+   (`analyze_chembl_hits.py`, `compare_chembl_clamp_morgan_enrichment.py`;
+   paper §3.3, Fig. 3)
+6. **Paper statistics and figures** — `make stats figures`
+   (`paper_bootstrap_ci.py`, `paper_feature_importance.py`,
+   `make_journal_figures.py`)
 
 ## Notes
 
 - Evaluations use Murcko-scaffold-aware splits throughout
   (Bemis & Murcko 1996; MoleculeNet protocol). Random splits are not used
   for any headline number.
-- The two binary XGBoost models are also provided pretrained in `models/`
-  so steps 4–6 can be run without retraining.
-- Large regenerable artifacts (raw L1000 matrices, multi-GB ChEMBL prediction
-  dumps) are deliberately not version-controlled; the scripts above regenerate
-  them.
+- The binary/3-class XGBoost models are provided pretrained in `models/`, so
+  `make stats` and `make figures` run without retraining.
+- Large regenerable intermediates (raw L1000 matrices, multi-GB ChEMBL
+  prediction dumps, embedding caches) are git-ignored; the pipeline
+  regenerates them in the repository root.
 
 ## License
 

@@ -26,7 +26,7 @@ from rdkit.Chem import FindAtomEnvironmentOfRadiusN, rdMolDescriptors
 
 RDLogger.DisableLog("rdApp.*")
 
-REPO = str(Path(__file__).resolve().parent)
+REPO = str(Path(__file__).resolve().parents[1])
 MODEL_PATH = f"{REPO}/models/binary_morgan_only_xgb.pkl"
 HAMDB_PATH = f"{REPO}/data/hamdb_autophagy_directions.csv"
 BACKGROUND_PATH = f"{REPO}/data/chembl_neutral_candidates.csv"
@@ -173,33 +173,10 @@ def main():
     print("\nTop bits:")
     print(df.to_string(index=False))
 
-    # --- figure ---------------------------------------------------------------
-    def short_label(row):
-        s = row["smarts"]
-        s = s if len(s) <= 28 else s[:25] + "..."
-        return f"bit {row['bit']} | {s}"
-
-    labels = [short_label(r) for _, r in df.iloc[::-1].iterrows()]
-    values = df["gain"].values[::-1]
-
-    fig, ax = plt.subplots(figsize=(6.5, 4.5))
-    ax.barh(range(len(values)), values, color="#4878A8", edgecolor="black", linewidth=0.5)
-    ax.set_yticks(range(len(values)))
-    ax.set_yticklabels(labels, fontsize=8)
-    ax.set_xlabel("XGBoost mean gain", fontsize=9)
-    ax.set_title(
-        "Top 15 Morgan fingerprint bits by gain\n(binary structure-only classifier)",
-        fontsize=10,
-    )
-    ax.spines[["top", "right"]].set_visible(False)
-    fig.tight_layout()
-    fig.savefig(f"{REPO}/paper/fig5_feature_importance.png", dpi=300)
-    plt.close(fig)
-
     print("\nSummary:")
     print(f"  background sample size: {n_bg} ChEMBL molecules")
     print(f"  modulator set: {n_mod} HAMDB compounds (Activator+Inhibitor)")
-    print("  wrote fig5_feature_importance.png and paper_feature_importance.csv")
+    print("  wrote paper/paper_feature_importance.csv (figure: make_journal_figures.py fig5)")
 
 
 if __name__ == "__main__":

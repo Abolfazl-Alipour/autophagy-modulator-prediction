@@ -35,7 +35,7 @@ warnings.filterwarnings('ignore')
 logging.basicConfig(level=logging.INFO, format='%(asctime)s | %(message)s')
 logger = logging.getLogger(__name__)
 
-WORK_DIR = Path(__file__).resolve().parent
+WORK_DIR = Path(__file__).resolve().parents[1]
 HAMDB_PATH = WORK_DIR / 'data' / 'hamdb_autophagy_directions.csv'
 CHEMBL_CANDIDATES_PATH = WORK_DIR / 'data' / 'chembl_neutral_candidates.csv'
 
@@ -76,7 +76,11 @@ def compute_scaffolds(smiles_list, n_jobs=N_JOBS):
 
 def cluster_scaffolds(scaffold_smiles, cutoff=0.7):
     """Cluster scaffold SMILES by Tanimoto similarity using Butina."""
-    unique_scaffolds = sorted(set(s for s in scaffold_smiles if s))  # sorted: set order is hash-seed dependent
+    # NOTE: keep list(set(...)) as-is. The reconstructed split, the committed
+    # bootstrap_auroc_ci.csv, and the manuscript AUROC CIs were all produced with
+    # this exact (hash-seed-dependent) ordering under PYTHONHASHSEED=0; sorting
+    # here changes the split and the published numbers (see docs/REVIEW_RESPONSES.md).
+    unique_scaffolds = list(set(s for s in scaffold_smiles if s))
     logger.info(f'Clustering {len(unique_scaffolds)} unique scaffolds...')
 
     fps = []

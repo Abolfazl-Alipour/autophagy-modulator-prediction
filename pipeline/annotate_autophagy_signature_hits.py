@@ -56,7 +56,7 @@ def main():
     df = df.sort_values('activator_corr_mean', ascending=False).reset_index(drop=True)
 
     # Save annotated full CSV
-    df.to_csv('autophagy_signature_hits_all_annotated.csv', index=False)
+    df.to_csv('results/autophagy_signature_hits_all_annotated.csv', index=False)
     logger.info("Saved autophagy_signature_hits_all_annotated.csv")
 
     # Generate threshold summary

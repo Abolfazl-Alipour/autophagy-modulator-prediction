@@ -22,7 +22,7 @@ from sklearn.metrics import roc_auc_score, average_precision_score, f1_score, pr
 import xgboost as xgb
 from joblib import Parallel, delayed
 
-WORK_DIR = Path(__file__).resolve().parent
+WORK_DIR = Path(__file__).resolve().parents[1]
 HAMDB_PATH = WORK_DIR / 'data' / 'hamdb_autophagy_directions.csv'
 RANDOM_STATE = 42
 N_JOBS = 12

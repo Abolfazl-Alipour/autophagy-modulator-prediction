@@ -11,11 +11,11 @@ import pandas as pd
 from pathlib import Path
 from sklearn.metrics import roc_auc_score
 
-sys.path.insert(0, str(Path(__file__).resolve().parent / 'src' / 'clamp'))
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'src' / 'clamp'))
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import generate_roc_curves as g
 
-WORK_DIR = Path(__file__).resolve().parent
+WORK_DIR = Path(__file__).resolve().parents[1]
 N_BOOTSTRAP = 1000
 rng = np.random.default_rng(42)
 

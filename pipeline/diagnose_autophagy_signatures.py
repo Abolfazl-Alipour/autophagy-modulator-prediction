@@ -198,7 +198,7 @@ def main():
         'inhibitor_self_corr_mean': float(np.nanmean(inh_self_corrs)),
         'inhibitor_self_corr_median': float(np.nanmedian(inh_self_corrs)),
     }
-    pd.DataFrame([diag]).to_csv('autophagy_signature_diagnostics.csv', index=False)
+    pd.DataFrame([diag]).to_csv('results/autophagy_signature_diagnostics.csv', index=False)
     logger.info("\nSaved autophagy_signature_diagnostics.csv")
 
 

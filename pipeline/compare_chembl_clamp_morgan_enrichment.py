@@ -27,7 +27,7 @@ warnings.filterwarnings('ignore')
 logging.basicConfig(level=logging.INFO, format='%(asctime)s | %(message)s')
 logger = logging.getLogger(__name__)
 
-WORK_DIR = Path(__file__).resolve().parent
+WORK_DIR = Path(__file__).resolve().parents[1]
 CHEMBL_CANDIDATES_PATH = WORK_DIR / 'data' / 'chembl_neutral_candidates.csv'
 MORGAN_MODEL_PATH = WORK_DIR / 'models' / 'binary_morgan_only_xgb.pkl'
 CLAMP_MODEL_PATH = WORK_DIR / 'models' / 'binary_morgan_clamp_xgb.pkl'

@@ -16,7 +16,7 @@ matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from scipy.stats import spearmanr, norm
 
-WORK_DIR = Path(__file__).resolve().parent
+WORK_DIR = Path(__file__).resolve().parents[1]
 PAPER_DIR = WORK_DIR / 'paper'
 
 # Okabe-Ito colorblind-safe palette

@@ -128,7 +128,7 @@ def main():
     print(f"Missing from L1000: {len(not_in_l1000)}")
 
     # Save
-    with open('autophagy_genes.txt', 'w') as f:
+    with open('data/autophagy_genes.txt', 'w') as f:
         for g in in_l1000:
             f.write(g + '\n')
     print(f"\nSaved {len(in_l1000)} autophagy genes to autophagy_genes.txt")

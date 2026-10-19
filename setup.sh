@@ -36,8 +36,7 @@ done
 
 cat <<'MSG'
 Setup complete. Next steps:
-  make figures   # regenerate all 5 paper figures from the included caches (minutes, no L1000 needed)
-  make stats     # bootstrap AUROC CIs + feature importance (needs CLAMP checkpoint, downloaded above)
+  make full      # every manuscript statistic + all 5 figures (minutes, no L1000 needed)
   make paper     # recompile the manuscript (needs a LaTeX toolchain, e.g. tectonic or TeX Live)
 For the full pipeline from raw data (incl. the L1000 download), see README.md.
 MSG

@@ -247,7 +247,7 @@ def main():
 
     # Save results
     df = pd.DataFrame(results)
-    df.to_csv('hamdb_autophagy_smoke_results.csv', index=False)
+    df.to_csv('results/hamdb_autophagy_smoke_results.csv', index=False)
     logger.info(f"\nSaved hamdb_autophagy_smoke_results.csv")
     logger.info("\nSummary:")
     logger.info(df.to_string(index=False))

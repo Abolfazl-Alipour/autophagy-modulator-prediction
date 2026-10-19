@@ -105,7 +105,7 @@ def main():
     inhibitor_mean = np.nanmean(Y_inhibitor, axis=0)
     inhibitor_median = np.nanmedian(Y_inhibitor, axis=0)
 
-    np.savez_compressed('autophagy_activator_signature.npz',
+    np.savez_compressed('results/autophagy_activator_signature.npz',
                         mean=activator_mean,
                         median=activator_median,
                         gene_symbols=np.array(auto_genes, dtype=object),
@@ -113,7 +113,7 @@ def main():
                         n_compounds=len(activator_smiles & set(smiles_24h)))
     logger.info("Saved autophagy_activator_signature.npz")
 
-    np.savez_compressed('autophagy_inhibitor_signature.npz',
+    np.savez_compressed('results/autophagy_inhibitor_signature.npz',
                         mean=inhibitor_mean,
                         median=inhibitor_median,
                         gene_symbols=np.array(auto_genes, dtype=object),
@@ -153,17 +153,17 @@ def main():
     df = pd.DataFrame(records)
 
     # Save full ranking
-    df.to_csv('autophagy_signature_hits_all.csv', index=False)
+    df.to_csv('results/autophagy_signature_hits_all.csv', index=False)
     logger.info("Saved autophagy_signature_hits_all.csv")
 
     # Save top activator hits (excluding known HAMDB activators)
     top_activator_hits = df[~df['is_hamdb_activator']].sort_values('activator_corr_mean', ascending=False).head(200)
-    top_activator_hits.to_csv('activator_signature_hits.csv', index=False)
+    top_activator_hits.to_csv('results/activator_signature_hits.csv', index=False)
     logger.info(f"Saved activator_signature_hits.csv with {len(top_activator_hits)} top hits")
 
     # Save top inhibitor hits (excluding known HAMDB inhibitors)
     top_inhibitor_hits = df[~df['is_hamdb_inhibitor']].sort_values('inhibitor_corr_mean', ascending=False).head(200)
-    top_inhibitor_hits.to_csv('inhibitor_signature_hits.csv', index=False)
+    top_inhibitor_hits.to_csv('results/inhibitor_signature_hits.csv', index=False)
     logger.info(f"Saved inhibitor_signature_hits.csv with {len(top_inhibitor_hits)} top hits")
 
     # Summary

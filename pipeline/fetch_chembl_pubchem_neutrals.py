@@ -24,7 +24,7 @@ from joblib import Parallel, delayed
 logging.basicConfig(level=logging.INFO, format='%(asctime)s | %(message)s')
 logger = logging.getLogger(__name__)
 
-OUT_DIR = Path(__file__).resolve().parent
+OUT_DIR = Path(__file__).resolve().parents[1] / "data"
 OUT_DIR.mkdir(exist_ok=True)
 
 CHEMBL_OUT = OUT_DIR / 'chembl_neutral_candidates.csv'

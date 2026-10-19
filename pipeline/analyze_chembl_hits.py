@@ -12,7 +12,7 @@ import numpy as np
 import pandas as pd
 from pathlib import Path
 
-WORK_DIR = Path(__file__).resolve().parent
+WORK_DIR = Path(__file__).resolve().parents[1]
 
 
 def main():

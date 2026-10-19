@@ -40,7 +40,7 @@ def main():
     unimol_embs = torch.load('unimol_embeddings_l1000_10k.pt', map_location='cpu', weights_only=True)
 
     logger.info("Loading metadata...")
-    meta_df = pd.read_csv('embedded_compounds_metadata_10k.csv')
+    meta_df = pd.read_csv('data/embedded_compounds_metadata_10k.csv')
     control_smiles = set(meta_df[meta_df['is_control'] == True]['smiles'].tolist())
 
     logger.info("Setting up DataManager...")

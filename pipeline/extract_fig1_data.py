@@ -14,7 +14,7 @@ from scipy.stats import spearmanr
 
 warnings.filterwarnings('ignore')
 
-WORK_DIR = Path(__file__).resolve().parent
+WORK_DIR = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(WORK_DIR))
 
 from models_12k import NAFS2SingleHeadModel          # noqa: E402

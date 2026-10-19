@@ -293,7 +293,7 @@ def main():
         return
 
     # Save signatures
-    np.savez_compressed('autophagy_signatures_v2_per_cell.npz',
+    np.savez_compressed('results/autophagy_signatures_v2_per_cell.npz',
                         signatures=signatures,
                         gene_symbols=np.array([STRICT_AUTOPHAGY_GENES[i] for i in range(len(strict_indices))], dtype=object),
                         cell_lines=np.array(list(signatures.keys()), dtype=object))
@@ -419,12 +419,12 @@ def main():
     df['pvalue'] = 1 - norm.cdf(df['zscore'])
 
     # Save
-    df.to_csv('autophagy_signature_hits_all_v2.csv', index=False)
+    df.to_csv('results/autophagy_signature_hits_all_v2.csv', index=False)
 
     top_activator = df[(~df['is_hamdb_activator'])].sort_values('contrastive_score', ascending=False).head(200)
     top_inhibitor = df[(~df['is_hamdb_inhibitor'])].sort_values('contrastive_score', ascending=True).head(200)
-    top_activator.to_csv('activator_signature_hits_v2.csv', index=False)
-    top_inhibitor.to_csv('inhibitor_signature_hits_v2.csv', index=False)
+    top_activator.to_csv('results/activator_signature_hits_v2.csv', index=False)
+    top_inhibitor.to_csv('results/inhibitor_signature_hits_v2.csv', index=False)
 
     logger.info(f"Saved autophagy_signature_hits_all_v2.csv ({len(df)} compounds)")
     logger.info(f"Saved activator_signature_hits_v2.csv and inhibitor_signature_hits_v2.csv")
@@ -432,8 +432,8 @@ def main():
     # Save diagnostics
     diag_df = pd.DataFrame(cell_diag)
     cv_df = pd.DataFrame(cv_results)
-    diag_df.to_csv('autophagy_signature_cell_diag_v2.csv', index=False)
-    cv_df.to_csv('autophagy_signature_cv_v2.csv', index=False)
+    diag_df.to_csv('results/autophagy_signature_cell_diag_v2.csv', index=False)
+    cv_df.to_csv('results/autophagy_signature_cv_v2.csv', index=False)
 
     logger.info("\nSummary:")
     logger.info(f"  Cell lines with signatures: {len(signatures)}")

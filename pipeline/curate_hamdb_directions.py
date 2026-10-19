@@ -184,8 +184,8 @@ def main():
                 'Canonical_SMILES', 'Category', 'Pathway', 'Target',
                 'Biological_Description', 'autophagy_direction', 'rationale']
     out_cols = [c for c in out_cols if c in hamdb.columns]
-    hamdb[out_cols].to_csv('hamdb_autophagy_directions.csv', index=False)
-    print('Saved hamdb_autophagy_directions.csv')
+    hamdb[out_cols].to_csv('data/hamdb_autophagy_directions.csv', index=False)
+    print('Saved data/hamdb_autophagy_directions.csv')
 
     # Print breakdown by category for manual review
     print('\nBreakdown by direction within non-obvious categories:')

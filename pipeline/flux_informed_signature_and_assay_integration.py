@@ -43,13 +43,13 @@ logger = logging.getLogger(__name__)
 # ---------------------------------------------------------------------------
 # Configuration
 # ---------------------------------------------------------------------------
-WORK_DIR = Path(__file__).resolve().parent
+WORK_DIR = Path(__file__).resolve().parents[1]
 CACHE_PATH = WORK_DIR / 'diag_cache_v9_morgan_full.npz'
 HAMDB_PATH = WORK_DIR / 'data' / 'hamdb_autophagy_directions.csv'
 PERT_INFO_PATH = WORK_DIR / 'data/l1000/GSE92742_Broad_LINCS_pert_info.txt.gz'
 GENE_FILE = WORK_DIR / 'autophagy_genes.txt'
 
-OUT_DIR = WORK_DIR
+OUT_DIR = WORK_DIR / 'results'
 N_TOP_GENES = 25
 MIN_CELL_LINES_PER_GENE = 3
 N_PERMUTATIONS = 500
@@ -139,7 +139,7 @@ def get_murcko_scaffold(smiles: str) -> str:
 
 
 def compute_scaffolds(smiles: np.ndarray, n_jobs: int = N_JOBS) -> np.ndarray:
-    cache_path = OUT_DIR / 'scaffold_cache.npy'
+    cache_path = WORK_DIR / 'scaffold_cache.npy'
     if cache_path.exists():
         logger.info('Loading cached scaffolds...')
         return np.load(cache_path, allow_pickle=True)
@@ -469,7 +469,7 @@ def inverse_search(
 # ---------------------------------------------------------------------------
 # ChEMBL assay integration
 # ---------------------------------------------------------------------------
-CACHED_CHEMBL_DIR = OUT_DIR / 'chembl_cache'
+CACHED_CHEMBL_DIR = WORK_DIR / 'chembl_cache'
 CACHED_CHEMBL_DIR.mkdir(exist_ok=True)
 
 

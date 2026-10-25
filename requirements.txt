@@ -1,4 +1,11 @@
-# Core scientific stack (Python 3.12)
+# Core scientific stack.
+# Environment note (corrected 2026-10-25): the models and results reported
+# in the paper were produced in a miniconda environment running Python
+# 3.13.11, PyTorch 2.12.1 (CPU), RDKit 2026.3.2, and XGBoost 3.4.1; those
+# versions are stamped in the saved model files. This requirements file
+# describes the separate Python 3.12 virtual environment built on
+# 2026-09-26 for post-hoc analyses, which reproduced the reported bootstrap
+# confidence intervals identically. The manuscript states both environments.
 rdkit>=2023.3
 xgboost>=2.0
 pandas
